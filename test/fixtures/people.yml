@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nid: 1
+  name: MyString
+  email: MyString
+  phoneN: 1
+  live_in: MyString
+  bd: 2018-03-20 20:04:14
+
+two:
+  nid: 1
+  name: MyString
+  email: MyString
+  phoneN: 1
+  live_in: MyString
+  bd: 2018-03-20 20:04:14

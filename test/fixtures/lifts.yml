@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  from_to: MyString
+  location: MyString
+  shareable: false
+
+two:
+  from_to: MyString
+  location: MyString
+  shareable: false
