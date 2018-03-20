@@ -1,6 +1,6 @@
 module Api
   module V1
-    class DataControlor < ApplicationController
+    class DataController < ApplicationController
       def index
         lifts = Lift.all;
         render json: {status: 'Success', message: 'loaded lifts', data: lifts},status: :ok
