@@ -2,25 +2,23 @@ module Api
   module V1
     class DataController < ApplicationController
       def index
-        lifts = Lift.all;
-        render json: {status: 'Success', message: 'loaded lifts', data: lifts},status: :ok
-        # institutions = Institution.all;
-        # businfos = Businfo.all;
-        # drivers = Driver.all;
-        # groups = Group.all;
-        # parents = Parent.all;
-        # students = Student.all;
-        # teachers = Teacher.all;
+        institution = Institution.order('created_at DESC')
+        for elm in institution
+          @lifts =+ elm.Lift.order('created_at DESC')
+          @students =+ @lifts.Studebt.order('ceated_at DESC')
+        end
+        render json: {status: 'Success', message: 'loaded institutions', data: institution},status: :ok
+
       end
 
       def show
-        lift = Lift.find(params[:id]);
-        render json: {status: 'Success', message: 'loaded lift', data: lift},status: :ok
+        institution = Institution.find(params[:id]);
+        render json: {status: 'Success', message: 'loaded institutions', data: institution},status: :ok
       end
 
       def create
-        lift =Lift.new(lift_params)
-        if lift.save
+        institution =Lift.new(institution_params)
+        if institution.save
           render json: {status: 'Success', message: 'lift saved', data: lift},status: :ok
         else
           render json: {status: 'ERROR', message: 'lift not saved', data: lift.errors},status: :unprocessable_entity
@@ -48,8 +46,40 @@ module Api
       end
 
       private
+      def institution_params
+        params.permit(:name, :location, :about)
+      end
+
       def lift_params
         params.permit(:from_to, :location, :shareable)
+      end
+
+      def bus_params
+        params.permit(:busID)
+      end
+
+      def driver_params
+        params.permit(:licence)
+      end
+
+      def group_params
+        params.permit(:gid)
+      end
+
+      def parent_params
+        params.permit(:person_params)
+      end
+
+      def student_params
+        params.permit(:person_params)
+      end
+
+      def teacher_params
+        params.permit(:person_params, :degree, :position)
+      end
+
+      def person_params
+        params.permit(:nid, :name, :email, :phoneN, :live_in,)
       end
     end
   end
