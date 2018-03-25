@@ -13,5 +13,8 @@ Rails.application.routes.draw do
         resources :people
       end
     end
+    namespace 'vt' do
+      resources :lifts
+    end
   end
 end
