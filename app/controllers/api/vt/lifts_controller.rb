@@ -3,40 +3,40 @@ module Api
     class LiftsController < ApplicationController
       def index
         @lifts = Lift.order('created_at DESC')        
-        render json: {status: 'Success', message: 'loaded institutions', data: lifts},status: :ok
+        render json: {status: 'Success', message: 'loaded institutions', data: @lifts},status: :ok
 
       end
 
       def show
-        @lifts = Lift.find(params[:id]);
-        render json: {status: 'Success', message: 'loaded institutions', data: lifts},status: :ok
+        @lift = Lift.find(params[:id]);
+        render json: {status: 'Success', message: 'loaded institutions', data: @lift},status: :ok
       end
 
       def create
-        @lifts = Lift.new(lift_params)
-        if lifts.save
-          render json: {status: 'Success', message: 'lift saved', data: lift},status: :ok
+        @lift = Lift.new(lift_params)
+        if @lift.save
+          render json: {status: 'Success', message: 'lift saved', data: @lift},status: :ok
         else
-          render json: {status: 'ERROR', message: 'lift not saved', data: lift.errors},status: :unprocessable_entity
+          render json: {status: 'ERROR', message: 'lift not saved', data: @lift.errors},status: :unprocessable_entity
         end
       end
 
       def destroy
         @lift = Lift.find(params[:id])
-        lift.destroy
-        if lift.save
-          render json: {status: 'Success', message: 'deleted lift', data: lift},status: :ok
+        @lift.destroy
+        if @lift.save
+          render json: {status: 'Success', message: 'deleted lift', data: @lift},status: :ok
         else
-          render json: {status: 'ERROR', message: 'lift not deleted', data: lift.errors},status: :unprocessable_entity
+          render json: {status: 'ERROR', message: 'lift not deleted', data: @lift.errors},status: :unprocessable_entity
         end
       end
 
       def update
         @lift = Lift.find(params[:id])
-        if lift.update_attributes(lift_params)
-          render json: {status: 'Success', message: 'lift updated', data: lift},status: :ok
+        if @lift.update_attributes(lift_params)
+          render json: {status: 'Success', message: 'lift updated', data: @lift},status: :ok
         else
-          render json: {status: 'ERROR', message: 'lift not updated', data: lift.errors},status: :unprocessable_entity
+          render json: {status: 'ERROR', message: 'lift not updated', data: @lift.errors},status: :unprocessable_entity
         end
       end
 
