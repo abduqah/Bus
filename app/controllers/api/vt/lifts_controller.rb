@@ -1,8 +1,8 @@
 module Api
-  module VT
+  module Vt
     class LiftsController < ApplicationController
       def index
-        @lifts = Lift.order('created_at DESC')
+        @lifts = Lift.order('created_at DESC')        
         render json: {status: 'Success', message: 'loaded institutions', data: lifts},status: :ok
 
       end
