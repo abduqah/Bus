@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   namespace 'api' do
     namespace 'v1' do
-      resources :institution do
+      resources :institutions do
         resources :lifts do
           resources :students
           resources :parents
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       end
     end
     namespace 'vt' do
-      resources :institution do
+      resources :institutions do
         resources :lifts
         resources :students
         resources :parents
