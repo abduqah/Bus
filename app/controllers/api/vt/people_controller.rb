@@ -2,21 +2,21 @@ module Api
   module Vt
     class PeopleController < ApplicationController
       def index
-        @institution = Institution.find(params[:id])
-        @person = @institution.person.order('created_at DESC')        
+
+        @person = Person.order('created_at DESC')        
         render json: {status: 'Success', message: 'loaded people', data: @person},status: :ok
 
       end
 
       def show
-        @institution = Institution.find(params[:id])
-        @person = @institution.person.find(params[:id]);
+
+        @person = Person.find(params[:id]);
         render json: {status: 'Success', message: 'loaded person', data: @person},status: :ok
       end
 
       def create
-        @institution = Institution.find(params[:id])
-        @person = @institution.person.new(person_params)
+
+        @person = Person.new(person_params)
         if @person.save
           render json: {status: 'Success', message: 'person saved', data: @person},status: :ok
         else
@@ -25,8 +25,8 @@ module Api
       end
 
       def destroy
-        @institution = Institution.find(params[:id])
-        @person = @institution.person.find(params[:id])
+
+        @person = Person.find(params[:id])
         @person.destroy
         if @person.save
           render json: {status: 'Success', message: 'deleted person', data: @person},status: :ok

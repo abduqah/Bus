@@ -2,21 +2,21 @@ module Api
   module Vt
     class BusinfosController < ApplicationController
       def index
-        @institution = Institution.find(params[:id])
-        @buses = @institution.businfo.all       
+
+        @buses = Businfo.all       
         render json: {status: 'Success', message: 'loaded bus', data: @buses},status: :ok
 
       end
 
       def show
-        @institution = Institution.find(params[:id])
-        @bus = @institution.businfos.find(params[:id]);
+
+        @bus = Businfo.find(params[:id]);
         render json: {status: 'Success', message: 'loaded bus', data: @bus},status: :ok
       end
 
       def create
-        @institution = Institution.find(params[:id])
-        @bus = @institution.businfos.new(bus_params)
+
+        @bus = Businfo.new(bus_params)
         if @bus.save
           render json: {status: 'Success', message: 'bus saved', data: @bus},status: :ok
         else
@@ -25,8 +25,8 @@ module Api
       end
 
       def destroy
-        @institution = Institution.find(params[:id])
-        @bus = @institution.businfos.find(params[:id])
+
+        @bus = Businfo.find(params[:id])
         @bus.destroy
         if @bus.save
           render json: {status: 'Success', message: 'deleted bus', data: @bus},status: :ok
@@ -36,8 +36,8 @@ module Api
       end
 
       def update
-        @institution = Institution.find(params[:id])
-        @bus = @institution.businfos.find(params[:id])
+
+        @bus = Businfo.find(params[:id])
         if @bus.update_attributes(bus_params)
           render json: {status: 'Success', message: 'bus updated', data: @bus},status: :ok
         else
