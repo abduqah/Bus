@@ -62,15 +62,15 @@ module Api
       end
 
       def parent_params
-        params.permit(:person_params)
+        params.permit(person_params)
       end
 
       def student_params
-        params.permit(:person_params)
+        params.permit(person_params)
       end
 
       def teacher_params
-        params.permit(:person_params, :degree, :position)
+        params.permit(person_params, :degree, :position)
       end
 
       def person_params
