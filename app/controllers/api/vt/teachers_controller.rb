@@ -3,13 +3,13 @@ module Api
     class TeachersController < ApplicationController
       def index
         @teachers = Teacher.order('created_at DESC')        
-        render json: {status: 'Success', message: 'loaded institutions', data: @teachers},status: :ok
+        render json: {status: 'Success', message: 'loaded teachers', data: @teachers},status: :ok
 
       end
 
       def show
         @teacher = Teacher.find(params[:id]);
-        render json: {status: 'Success', message: 'loaded institutions', data: @teacher},status: :ok
+        render json: {status: 'Success', message: 'loaded teachers', data: @teacher},status: :ok
       end
 
       def create

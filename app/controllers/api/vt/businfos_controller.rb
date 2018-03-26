@@ -2,41 +2,46 @@ module Api
   module Vt
     class BusinfosController < ApplicationController
       def index
-        @buses = Businfo.all       
-        render json: {status: 'Success', message: 'loaded institutions', data: @buses},status: :ok
+        @institution = Institution.find(params[:id])
+        @buses = @institution.businfo.all       
+        render json: {status: 'Success', message: 'loaded bus', data: @buses},status: :ok
 
       end
 
       def show
-        @bus = Businfo.find(params[:id]);
-        render json: {status: 'Success', message: 'loaded institutions', data: @bus},status: :ok
+        @institution = Institution.find(params[:id])
+        @bus = @institution.businfos.find(params[:id]);
+        render json: {status: 'Success', message: 'loaded bus', data: @bus},status: :ok
       end
 
       def create
-        @bus = Businfo.new(bus_params)
+        @institution = Institution.find(params[:id])
+        @bus = @institution.businfos.new(bus_params)
         if @bus.save
-          render json: {status: 'Success', message: 'lift saved', data: @bus},status: :ok
+          render json: {status: 'Success', message: 'bus saved', data: @bus},status: :ok
         else
-          render json: {status: 'ERROR', message: 'lift not saved', data: @bus.errors},status: :unprocessable_entity
+          render json: {status: 'ERROR', message: 'bus not saved', data: @bus.errors},status: :unprocessable_entity
         end
       end
 
       def destroy
-        @bus = Businfo.find(params[:id])
+        @institution = Institution.find(params[:id])
+        @bus = @institution.businfos.find(params[:id])
         @bus.destroy
         if @bus.save
-          render json: {status: 'Success', message: 'deleted lift', data: @bus},status: :ok
+          render json: {status: 'Success', message: 'deleted bus', data: @bus},status: :ok
         else
-          render json: {status: 'ERROR', message: 'lift not deleted', data: @bus.errors},status: :unprocessable_entity
+          render json: {status: 'ERROR', message: 'bus not deleted', data: @bus.errors},status: :unprocessable_entity
         end
       end
 
       def update
-        @bus = Businfo.find(params[:id])
+        @institution = Institution.find(params[:id])
+        @bus = @institution.businfos.find(params[:id])
         if @bus.update_attributes(bus_params)
-          render json: {status: 'Success', message: 'lift updated', data: @bus},status: :ok
+          render json: {status: 'Success', message: 'bus updated', data: @bus},status: :ok
         else
-          render json: {status: 'ERROR', message: 'lift not updated', data: @bus.errors},status: :unprocessable_entity
+          render json: {status: 'ERROR', message: 'bus not updated', data: @bus.errors},status: :unprocessable_entity
         end
       end
 

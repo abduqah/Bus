@@ -2,6 +2,8 @@ module Api
   module Vt
     class GroupsController < ApplicationController
       def index
+        @institution = Institution.find(params[:id])
+        @driver = @institution.drivers
         @groups = Group.order('created_at DESC')        
         render json: {status: 'Success', message: 'loaded institutions', data: @groups},status: :ok
 

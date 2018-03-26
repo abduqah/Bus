@@ -3,13 +3,13 @@ module Api
     class DriversController < ApplicationController
       def index
         @drivers = Driver.order('created_at DESC')        
-        render json: {status: 'Success', message: 'loaded institutions', data: @drivers},status: :ok
+        render json: {status: 'Success', message: 'loaded drivers', data: @drivers},status: :ok
 
       end
 
       def show
         @driver = Driver.find(params[:id]);
-        render json: {status: 'Success', message: 'loaded institutions', data: @driver},status: :ok
+        render json: {status: 'Success', message: 'loaded drivers', data: @driver},status: :ok
       end
 
       def create

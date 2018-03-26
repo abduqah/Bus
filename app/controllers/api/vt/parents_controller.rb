@@ -3,13 +3,13 @@ module Api
     class ParentsController < ApplicationController
       def index
         @parents = Parent.order('created_at DESC')        
-        render json: {status: 'Success', message: 'loaded institutions', data: @parents},status: :ok
+        render json: {status: 'Success', message: 'loaded parents', data: @parents},status: :ok
 
       end
 
       def show
         @parent = Parent.find(params[:id]);
-        render json: {status: 'Success', message: 'loaded institutions', data: @parent},status: :ok
+        render json: {status: 'Success', message: 'loaded parents', data: @parent},status: :ok
       end
 
       def create
