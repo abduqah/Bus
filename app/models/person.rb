@@ -8,5 +8,5 @@ class Person < ApplicationRecord
   # has_one :student
   # has_one :parent
   # has_one :driver
-  #belongs_to :institution
+  belongs_to :institution
 end
