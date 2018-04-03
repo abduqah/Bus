@@ -2,21 +2,24 @@ module Api
   module V1
     class BusinfosController < ApplicationController
       def index
-        @inst = Institution.find(params[:id])
-        @buses = @inst.businfos.all
+        @inst = Institution.find(params[:institution_id])
+        @lift = @inst.lifts.find(params[:lift_id])
+        @buses = @lift[:businfo]
         render json: {status: 'Success', message: 'loaded bus', data: @buses},status: :ok
 
       end
 
       def show
-        @inst = Institution.find(params[:id])
+        @inst = Institution.find(params[:institution_id])
         @bus = @inst.businfos.find(params[:id])
         render json: {status: 'Success', message: 'loaded bus', data: @bus},status: :ok
       end
 
       def create
-        @inst = Institution.find(params[:id])
+        @inst = Institution.find(params[:institution_id])
+        @lift = @inst.lifts.find(params[:lift_id])
         @bus = @inst.businfos.new(bus_params)
+        @lift.businfo.add(@bus)
         if @bus.save
           render json: {status: 'Success', message: 'bus saved', data: @bus},status: :ok
         else

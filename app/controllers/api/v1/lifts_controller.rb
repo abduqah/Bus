@@ -1,22 +1,22 @@
 module Api
-  module Vt
+  module V1
     class LiftsController < ApplicationController
       def index
-
-        @lifts = Lift.order('created_at DESC')        
+        @inst = Institution.find(params[:institution_id])
+        @lifts = @inst.lifts.order('created_at DESC')        
         render json: {status: 'Success', message: 'loaded lifts', data: @lifts},status: :ok
 
       end
 
       def show
-
-        @lift = Lift.find(params[:id]);
+        @inst = Institution.find(params[:institution_id])
+        @lift = @inst.lifts.find(params[:id]);
         render json: {status: 'Success', message: 'loaded lifts', data: @lift},status: :ok
       end
 
       def create
-
-        @lift = Lift.new(lift_params)
+        @inst = Institution.find(params[:institution_id])
+        @lift = @inst.lifts.new(lift_params)
         if @lift.save
           render json: {status: 'Success', message: 'lift saved', data: @lift},status: :ok
         else
@@ -25,8 +25,8 @@ module Api
       end
 
       def destroy
-
-        @lift = Lift.find(params[:id])
+        @inst = Institution.find(params[:institution_id])
+        @lift = @inst.lifts.find(params[:id])
         @lift.destroy
         if @lift.save
           render json: {status: 'Success', message: 'deleted lift', data: @lift},status: :ok
@@ -36,8 +36,8 @@ module Api
       end
 
       def update
-
-        @lift = Lift.find(params[:id])
+        @inst = Institution.find(params[:institution_id])
+        @lift = @inst.lifts.find(params[:id])
         if @lift.update_attributes(lift_params)
           render json: {status: 'Success', message: 'lift updated', data: @lift},status: :ok
         else

@@ -1,5 +1,5 @@
 module Api
-  module Vt
+  module V1
     class InstitutionsController < ApplicationController
       def index
         @institutions = Institution.order('created_at DESC')        
